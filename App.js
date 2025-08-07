@@ -1,6 +1,6 @@
 import React from 'react';
-import BusinessSelectorScreen from './screens/BusinessSelectorScreen';
+import Navigation from './navigation/Navigation';
 
 export default function App() {
-  return <BusinessSelectorScreen />;
+  return <Navigation />;
 }

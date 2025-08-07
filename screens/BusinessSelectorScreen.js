@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const businesses = ['Boutique', 'Cold Store', 'Hardware'];
 
-export default function BusinessSelectorScreen() {
+export default function BusinessSelectorScreen({navigation}) {
   const handleSelect = (type) => {
     alert('You selected: ${type}');
     // Future: Navigate to dashboard for selected business
