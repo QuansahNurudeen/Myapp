@@ -1,24 +1,63 @@
-// screens/LoginScreen.js
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { useFirebase } from './FirebaseContext';
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { auth } = useFirebase();
+
+  const handleLogin = async () => {
+    if (password.length !== 8) {
+      Alert.alert("Error", "Password must be exactly 8 characters");
+      return;
+    }
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigation.navigate('BusinessSelector');
+    } catch (error) {
+      Alert.alert("Error", error.message);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Business Manager App</Text>
-      <Text style={styles.subheader}>Log in</Text>
+      <Text style={styles.subheader}>Login</Text>
 
-      <TextInput style={styles.input} placeholder="Email" keyboardType="email-address" />
-      <TextInput style={styles.input} placeholder="Password" secureTextEntry />
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
 
-      <TouchableOpacity 
-       style={styles.button}
-        onPress={() => navigation.navigate('BusinessSelector')}>
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        maxLength={8}
+      />
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={handleLogin}
+      >
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
+      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+        <Text style={styles.link}>Don't have an account? Sign Up</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity>
-        <Text style={styles.forgot}>Forgot password?</Text>
+        <Text style={styles.link}>Forgot password?</Text>
       </TouchableOpacity>
     </View>
   );
@@ -32,34 +71,41 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 10,
   },
   subheader: {
     fontSize: 18,
     marginVertical: 15,
     textAlign: 'center',
+    color: '#555',
   },
   input: {
-    backgroundColor: '#eee',
-    borderRadius: 5,
-    padding: 12,
+    height: 50,
+    borderColor: '#ddd',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 15,
     marginBottom: 15,
+    backgroundColor: '#fff',
   },
   button: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#4D73FF',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
+    marginTop: 10,
   },
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
+    fontSize: 16,
   },
-  forgot: {
-    color: '#007bff',
-    marginTop: 12,
+  link: {
+    color: '#4D73FF',
     textAlign: 'center',
+    marginTop: 15,
   },
 });
