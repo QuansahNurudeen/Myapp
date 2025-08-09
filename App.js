@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FirebaseProvider, useFirebase } from './FirebaseContext';
+import { FirebaseProvider, useFirebase } from './screens/FirebaseContext';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 // Import all screens
