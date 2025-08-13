@@ -1,21 +1,25 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 
 const businesses = ['Boutique', 'Cold Store', 'Hardware'];
 
-export default function BusinessSelectorScreen({navigation}) {
+export default function BusinessSelectorScreen({ navigation }) {
   const handleSelect = (type) => {
-    alert('You selected: ${type}');
-    // Future: Navigate to dashboard for selected business
+    Alert.alert('Business Selected', 'You selected: ${type}');
+    navigation.navigate('AdminDashboard', { selectedBusiness: type });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome !</Text>
+      <Text style={styles.title}>Welcome!</Text>
       <Text style={styles.subtitle}>Which business do you want to manage?</Text>
 
       {businesses.map((type) => (
-        <TouchableOpacity key={type} style={styles.button} onPress={() => handleSelect(type)}>
+        <TouchableOpacity
+          key={type}
+          style={styles.button}
+          onPress={() => handleSelect(type)}
+        >
           <Text style={styles.buttonText}>{type}</Text>
         </TouchableOpacity>
       ))}
@@ -41,6 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#4D73FF',
     marginBottom: 40,
+    textAlign: 'center',
   },
   button: {
     width: '100%',

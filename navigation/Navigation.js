@@ -5,7 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignUpScreen';
 import BusinessSelectorScreen from '../screens/BusinessSelectorScreen';
-
+import AdminDashboardScreen from '../screens/AdminDashboardScreen';
+import EmployeeScreen from '../screens/EmployeeScreen';
 const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
@@ -15,6 +16,8 @@ export default function Navigation() {
         <Stack.Screen name="Signup" component={SignupScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="BusinessSelector" component={BusinessSelectorScreen} /> 
+        <Stack.Screen name="AdminDashboard" component={AdminDashboardScreen} options={{ title: "Admin Dashboard" }} />
+         <Stack.Screen name="Employee" component={EmployeeScreen} options={{ title: "Employee Dashboard" }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
