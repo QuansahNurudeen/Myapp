@@ -11,7 +11,7 @@ export default function BusinessSelectorScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome!</Text>
+      <Text style={styles.title}>Welcome to Trace!</Text>
       <Text style={styles.subtitle}>Which business do you want to manage?</Text>
 
       {businesses.map((type) => (

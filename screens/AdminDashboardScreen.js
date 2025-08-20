@@ -126,7 +126,7 @@ export default function AdminDashboardScreen({ navigation }) {
           <Text style={styles.menuButtonText}>☰</Text>
         </TouchableOpacity>
 
-        <Text style={styles.headerTitle}>Admin Dashboard</Text>
+        <Text style={styles.headerTitle}>Trace Admin Dashboard</Text>
 
         <TouchableOpacity style={styles.profileButton}>
           <Text style={styles.profileText}>👤</Text>
@@ -136,7 +136,7 @@ export default function AdminDashboardScreen({ navigation }) {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Business Selector */}
         <View style={styles.businessSelector}>
-          <Text style={styles.sectionTitle}>Select Business</Text>
+          <Text style={styles.sectionTitle}>Select Business (Trace)</Text>
           <View style={styles.businessButtons}>
             {businesses.map((business) => (
               <TouchableOpacity
@@ -179,7 +179,7 @@ export default function AdminDashboardScreen({ navigation }) {
 
         {/* Sales Trends Chart */}
         <View style={styles.chartContainer}>
-          <Text style={styles.sectionTitle}>Sales Trends</Text>
+          <Text style={styles.sectionTitle}>Sales Trends (Trace)</Text>
           <LineChart
             data={salesData}
             width={screenWidth - 40}
@@ -207,7 +207,7 @@ export default function AdminDashboardScreen({ navigation }) {
 
         {/* Top Performing Items */}
         <View style={styles.topItemsContainer}>
-          <Text style={styles.sectionTitle}>Top Performing Items</Text>
+          <Text style={styles.sectionTitle}>Top Performing Items (Trace)</Text>
           {topItems.map((item) => (
             <View key={item.id} style={styles.topItem}>
               <View style={styles.topItemInfo}>
@@ -221,7 +221,7 @@ export default function AdminDashboardScreen({ navigation }) {
 
         {/* Recent Sales Activity */}
         <View style={styles.recentSalesContainer}>
-          <Text style={styles.sectionTitle}>Recent Sales Activity</Text>
+          <Text style={styles.sectionTitle}>Recent Sales Activity (Trace)</Text>
           {recentSales.map((sale) => (
             <View key={sale.id} style={styles.saleItem}>
               <View style={styles.saleInfo}>
@@ -245,7 +245,7 @@ export default function AdminDashboardScreen({ navigation }) {
 
         {/* Report Generation Controls */}
         <View style={styles.reportsContainer}>
-          <Text style={styles.sectionTitle}>Generate Reports</Text>
+          <Text style={styles.sectionTitle}>Generate Reports (Trace)</Text>
           <View style={styles.reportButtons}>
             <TouchableOpacity style={styles.reportButton}>
               <Text style={styles.reportButtonText}>📊 Sales Report</Text>
@@ -261,7 +261,7 @@ export default function AdminDashboardScreen({ navigation }) {
 
         {/* Database Controls */}
         <View style={styles.databaseContainer}>
-          <Text style={styles.sectionTitle}>Database Management</Text>
+          <Text style={styles.sectionTitle}>Database Management (Trace)</Text>
           <View style={styles.databaseButtons}>
             <TouchableOpacity style={styles.databaseButton}>
               <Text style={styles.databaseButtonText}>💾 Backup Data</Text>

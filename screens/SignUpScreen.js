@@ -13,7 +13,7 @@ export default function SignUpScreen({ navigation }) {
         <Text style={styles.backButtonText}>{'←'}</Text>
       </TouchableOpacity>
 
-      <Text style={styles.header}>Business Manager App</Text>
+      <Text style={styles.header}>Trace</Text>
       <Text style={styles.subheader}>Sign Up</Text>
 
       <TextInput style={styles.input} placeholder="Full Name" />

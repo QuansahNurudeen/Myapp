@@ -118,7 +118,7 @@ export default function EmployeeScreen({ navigation, route }) {
   const renderHeader = () => (
     <View style={styles.header}>
       <View style={styles.headerLeft}>
-        <Text style={styles.businessName}>{selectedBusiness}</Text>
+        <Text style={styles.businessName}>Trace - {selectedBusiness}</Text>
         <Text style={styles.dateTime}>
           {currentTime.toLocaleDateString()} •{" "}
           {currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
@@ -157,7 +157,7 @@ export default function EmployeeScreen({ navigation, route }) {
     <ScrollView style={styles.content}>
       {/* Item Entry Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Item Entry</Text>
+        <Text style={styles.sectionTitle}>Item Entry (Trace)</Text>
 
         <TouchableOpacity style={styles.dropdown} onPress={() => setShowItemModal(true)}>
           <Text style={[styles.dropdownText, !selectedItem && styles.placeholder]}>
@@ -193,7 +193,7 @@ export default function EmployeeScreen({ navigation, route }) {
 
       {/* Payment Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Payment Details</Text>
+        <Text style={styles.sectionTitle}>Payment Details (Trace)</Text>
 
         <TouchableOpacity style={styles.dropdown} onPress={() => setShowPaymentModal(true)}>
           <Text style={styles.dropdownText}>{paymentMethod}</Text>
@@ -230,7 +230,7 @@ export default function EmployeeScreen({ navigation, route }) {
 
       {/* Quick Stats Panel */}
       <View style={styles.statsPanel}>
-        <Text style={styles.statsPanelTitle}>Today's Summary</Text>
+        <Text style={styles.statsPanelTitle}>Today's Summary (Trace)</Text>
         <View style={styles.statsRow}>
           <View style={styles.statItem}>
             <Text style={styles.statValue}>{todayStats.salesCount}</Text>
@@ -249,7 +249,7 @@ export default function EmployeeScreen({ navigation, route }) {
 
       {/* Recent Sales */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Recent Sales</Text>
+        <Text style={styles.sectionTitle}>Recent Sales (Trace)</Text>
         {recentSales.map((sale) => (
           <View key={sale.id} style={styles.saleItem}>
             <View style={styles.saleInfo}>
@@ -267,16 +267,16 @@ export default function EmployeeScreen({ navigation, route }) {
 
   const renderSalesHistory = () => (
     <View style={styles.content}>
-      <Text style={styles.sectionTitle}>My Sales History</Text>
+      <Text style={styles.sectionTitle}>My Sales History (Trace)</Text>
       <Text style={styles.comingSoon}>Sales history feature coming soon...</Text>
     </View>
   )
 
   const renderBusinessInfo = () => (
     <View style={styles.content}>
-      <Text style={styles.sectionTitle}>Business Information</Text>
+      <Text style={styles.sectionTitle}>Business Information (Trace)</Text>
       <View style={styles.infoCard}>
-        <Text style={styles.infoTitle}>{selectedBusiness}</Text>
+        <Text style={styles.infoTitle}>Trace - {selectedBusiness}</Text>
         <Text style={styles.infoText}>Business Type: {selectedBusiness}</Text>
         <Text style={styles.infoText}>Employee: John Doe</Text>
         <Text style={styles.infoText}>Shift: Morning (8:00 AM - 4:00 PM)</Text>
