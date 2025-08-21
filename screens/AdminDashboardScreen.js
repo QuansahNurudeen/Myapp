@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Alert } from "react"
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Dimensions, Modal } from "react-native"
 import { LineChart } from "react-native-chart-kit"
 
@@ -57,10 +57,10 @@ export default function AdminDashboardScreen({ navigation }) {
   ]
 
   const recentSales = [
-    { id: 1, customer: "John Doe", amount: 250, time: "2 min ago", status: "completed" },
-    { id: 2, customer: "Jane Smith", amount: 180, time: "5 min ago", status: "pending" },
-    { id: 3, customer: "Mike Johnson", amount: 320, time: "8 min ago", status: "completed" },
-    { id: 4, customer: "Sarah Wilson", amount: 95, time: "12 min ago", status: "completed" },
+    { id: 1, customer: "Amanullah", amount: 250, time: "2 min ago", status: "completed" },
+    { id: 2, customer: "Sunshine", amount: 180, time: "5 min ago", status: "pending" },
+    { id: 3, customer: "Philemon", amount: 320, time: "8 min ago", status: "completed" },
+    { id: 4, customer: "Jerna", amount: 95, time: "12 min ago", status: "completed" },
   ]
 
   const SidebarMenu = () => (
@@ -80,18 +80,20 @@ export default function AdminDashboardScreen({ navigation }) {
 
           {[
             { name: "Dashboard", icon: "📊", screen: "AdminDashboard" },
-            { name: "Inventory", icon: "📦", screen: "Inventory" },
-            { name: "Sales", icon: "💰", screen: "Sales" },
-            { name: "Reports", icon: "📈", screen: "Reports" },
+            { name: "Inventory", icon: "📦", screen: "InventoryManagement" },
+            { name: "Sales", icon: "💰", screen: "Employee" },
+            { name: "Expenses", icon: "💳", screen: "ExpenseManagement" },
+            { name: "Users", icon: "👥", screen: "UserManagement" },
+            { name: "Reports", icon: "📈", screen: "ExpenseManagement" },
             { name: "Settings", icon: "⚙️", screen: "Settings" },
-            { name: "Database", icon: "🗄️", screen: "Database" },
+            { name: "Database", icon: "🗄️", screen: "DatabaseManagement" },
           ].map((item, index) => (
             <TouchableOpacity
               key={index}
               style={styles.menuItem}
               onPress={() => {
                 setSidebarVisible(false)
-                // navigation.navigate(item.screen);
+                navigation.navigate(item.screen)
               }}
             >
               <Text style={styles.menuIcon}>{item.icon}</Text>
@@ -247,13 +249,34 @@ export default function AdminDashboardScreen({ navigation }) {
         <View style={styles.reportsContainer}>
           <Text style={styles.sectionTitle}>Generate Reports</Text>
           <View style={styles.reportButtons}>
-            <TouchableOpacity style={styles.reportButton}>
+            <TouchableOpacity
+              style={styles.reportButton}
+              onPress={() => {
+                Alert.alert("Sales Report", "Generating sales report...", [
+                  { text: "OK", onPress: () => navigation.navigate("ExpenseManagement") },
+                ])
+              }}
+            >
               <Text style={styles.reportButtonText}>📊 Sales Report</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.reportButton}>
+            <TouchableOpacity
+              style={styles.reportButton}
+              onPress={() => {
+                Alert.alert("Profit Report", "Generating profit report...", [
+                  { text: "OK", onPress: () => navigation.navigate("ExpenseManagement") },
+                ])
+              }}
+            >
               <Text style={styles.reportButtonText}>💰 Profit Report</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.reportButton}>
+            <TouchableOpacity
+              style={styles.reportButton}
+              onPress={() => {
+                Alert.alert("Inventory Report", "Generating inventory report...", [
+                  { text: "OK", onPress: () => navigation.navigate("InventoryManagement") },
+                ])
+              }}
+            >
               <Text style={styles.reportButtonText}>📦 Inventory Report</Text>
             </TouchableOpacity>
           </View>
