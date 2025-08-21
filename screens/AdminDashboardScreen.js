@@ -91,7 +91,9 @@ export default function AdminDashboardScreen({ navigation }) {
               style={styles.menuItem}
               onPress={() => {
                 setSidebarVisible(false)
-                // navigation.navigate(item.screen);
+                // navigate to the nested admin stack screens
+                // when this screen is rendered inside the AdminStack, navigation.navigate(item.screen) will work
+                navigation.navigate(item.screen)
               }}
             >
               <Text style={styles.menuIcon}>{item.icon}</Text>
