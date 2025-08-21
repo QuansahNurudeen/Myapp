@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import {
   View,
   Text,
@@ -24,6 +25,7 @@ export default function EmployeeScreen({ navigation, route }) {
   const [price, setPrice] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState("cash")
   const [customerName, setCustomerName] = useState("")
+  const RECENT_SALES_KEY = `@myapp_recent_sales_${selectedBusiness}`
   const [showItemModal, setShowItemModal] = useState(false)
   const [showPaymentModal, setShowPaymentModal] = useState(false)
 
@@ -83,6 +85,27 @@ export default function EmployeeScreen({ navigation, route }) {
     }
   }, [selectedItem, selectedBusiness])
 
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const raw = await AsyncStorage.getItem(RECENT_SALES_KEY)
+        if (raw) setRecentSales(JSON.parse(raw))
+      } catch (e) {
+        console.warn("Failed to load recent sales", e)
+      }
+    })()
+  }, [])
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        await AsyncStorage.setItem(RECENT_SALES_KEY, JSON.stringify(recentSales))
+      } catch (e) {
+        console.warn("Failed to save recent sales", e)
+      }
+    })()
+  }, [recentSales])
+
   const handleSubmitSale = () => {
     if (!selectedItem || quantity <= 0) {
       Alert.alert("Error", "Please select an item and enter valid quantity")
@@ -96,9 +119,12 @@ export default function EmployeeScreen({ navigation, route }) {
       quantity,
       time: currentTime.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
       amount: total,
+      paymentMethod,
+      customerName,
     }
 
-    setRecentSales((prev) => [newSale, ...prev.slice(0, 4)])
+    // add to the front of the full recentSales list (no slice) so history shows all recorded sales
+    setRecentSales((prev) => [newSale, ...prev])
     setTodayStats((prev) => ({
       ...prev,
       salesCount: prev.salesCount + 1,
@@ -266,10 +292,25 @@ export default function EmployeeScreen({ navigation, route }) {
   )
 
   const renderSalesHistory = () => (
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <Text style={styles.sectionTitle}>My Sales History (Trace)</Text>
-      <Text style={styles.comingSoon}>Sales history feature coming soon...</Text>
-    </View>
+      {recentSales.length === 0 ? (
+        <Text style={styles.comingSoon}>No recorded sales yet.</Text>
+      ) : (
+        recentSales.map((sale) => (
+          <View key={sale.id} style={styles.saleItem}>
+            <View style={styles.saleInfo}>
+              <Text style={styles.saleItemName}>{sale.item}</Text>
+              <Text style={styles.saleDetails}>
+                Qty: {sale.quantity} • {sale.time} • {sale.paymentMethod}
+              </Text>
+              {sale.customerName ? <Text style={styles.saleDetails}>Customer: {sale.customerName}</Text> : null}
+            </View>
+            <Text style={styles.saleAmount}>₵{Number(sale.amount).toFixed(2)}</Text>
+          </View>
+        ))
+      )}
+    </ScrollView>
   )
 
   const renderBusinessInfo = () => (
